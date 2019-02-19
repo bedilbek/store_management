@@ -1,7 +1,7 @@
-from models import Citizen
+from models.citizen import Citizen
 
 
-class Customer(Citizen.Citizen):
+class Customer(Citizen):
     def __init__(self, ssn, name, address, id, purchasingPoints, tel, memberships):
         super().__init__(ssn, name, address)
         self.id = id

@@ -1,9 +1,9 @@
 import datetime
 from xmlrpc.client import DateTime
 
-from models.Store import Store
-from models.Staff import Staff
-from models.Customer import Customer
+from models.store import Store
+from models.staff import Staff
+from models.customer import Customer
 
 
 class Order:
@@ -70,7 +70,13 @@ class Order:
         self.__productObjects = productObjects
 
     def setQuantity(self, quantity):
-        self.__quantity = quantity
+        try:
+            quantities = list(map(int, quantity))
+        except:
+            raise TypeError('quantity - Expected int, Actual' + str(type(quantity)))
+        if any([q <= 0 for q in quantities]):
+            raise ValueError('quantity - Should be no less than 1')
+        self.__quantity = quantities
 
     def getStoreObject(self):
         return self.__storeObject

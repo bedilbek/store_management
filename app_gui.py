@@ -1,19 +1,33 @@
 from tkinter import *
-from messageDialogBox import *
-from check import create_print_check
+from typing import List
+
+from message_dialog_box import *
+from check_window import create_print_check
 from initial_data import stores, staffs, customers, products, orders
+from models.order import Order
+from models.product import Product
 
 keyWindow = Tk()
 keyWindow.title(stores[0].name)
+prEntryFields = []
+customerIDVar = None
+staffNameVar = None
 
 def create_check(event):
-    create_print_check(keyWindow, orders[0])
-
-class Hello(object):
-    def __init__(self):
-        print("Hello from object")
-
-prEntryFields = []
+    products = []
+    try:
+        for object_entry in prEntryFields:
+            object_entry: List[Entry]
+            products.append({
+                Order.PRODUCT_KEY: Product(object_entry[1].get(), object_entry[0].get(), 'F', object_entry[2].get(), object_entry[4].get()),
+                Order.QUANTITY_KEY: object_entry[3].get(),
+                })
+        found_customer = list(filter(lambda c: c.id == int(customerIDVar.get()), customers))[0]
+        found_staff = list(filter(lambda s: s.name == staffNameVar.get(), staffs))[0]
+        order = Order(stores[0], found_customer, found_staff, products)
+        create_print_check(keyWindow, order)
+    except (TypeError, ValueError) as e:
+        showMessage(e)
 
 def onCanvasConfigure(event):
     event.widget.itemconfigure("products", width=event.width)
@@ -28,8 +42,8 @@ def addMoreAction(event):
     prListFrame.update_idletasks()
     prListCanvas.config(scrollregion=prListFrame.bbox("all"))
 
-def showMessage(event):
-    d = MessageDialogBox(keyWindow, "Something")
+def showMessage(message):
+    d = MessageDialogBox(keyWindow, message)
     keyWindow.wait_window(d.top)
 
 #Welcoming Label
@@ -106,6 +120,7 @@ prListCanvas.create_window((0,0), anchor=NW, window=prListFrame, tags="products"
 prListFrame.update_idletasks() #REQUIRED: For f.bbox() below to work!
 prListCanvas.config(scrollregion=prListFrame.bbox("all"))
 prListCanvas.bind("<Configure>", onCanvasConfigure)
+prListCanvas.itemconfigure('products', width=prListCanvas.winfo_width())
 
 #Controls: Setting Buttons
 controlsFrame = Frame(keyWindow)
@@ -117,6 +132,5 @@ closeBtn = Button(controlsFrame, text="Close", width=15)
 printBtn.pack(side=LEFT, padx=20, pady=10)
 closeBtn.pack(side=LEFT, padx=20, pady=10)
 closeBtn.bind("<Button-1>", lambda x: keyWindow.destroy())
-printBtn.bind("<Button-1>", showMessage)
-
+printBtn.bind('<Button-1>', create_check)
 keyWindow.mainloop()

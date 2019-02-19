@@ -2,7 +2,7 @@ from typing import Union
 
 
 class Product:
-    def __init__(self, productCode: int, name: str, description: str, price:Union[float, int], points: int):
+    def __init__(self, productCode: int, name: str, description: str, price: Union[float, int], points: int):
         self.productCode = productCode
         self.name = name
         self.description = description
@@ -19,17 +19,20 @@ class Product:
         return out
 
     def setProductCode(self, productCode: int):
-        if not isinstance(productCode, int):
-            raise TypeError(productCode="Expected: int, Actual: " + str(type(productCode)))
-        if productCode < 1:
-            raise ValueError(productCode="Should be not less than 1")
-        self.__productCode = productCode
-    
+        final = None
+        try:
+            final = int(productCode)
+        except:
+            raise TypeError(f'product_code - Expected: int, Actual: {str(type(productCode))}')
+        if final < 1:
+            raise ValueError(f'productCode - Should be not less than 1')
+        self.__productCode = final
+
     def setName(self, name: str):
         if len(name.strip()) < 1:
             raise ValueError(name="Should be at least length of 1")
         self.__name = name
-    
+
     def setDescription(self, description: str):
         if len(description.strip()) < 1:
             raise ValueError(name="Should be at least length of 1")
@@ -54,23 +57,23 @@ class Product:
             raise TypeError("points - Expected: int, Actual" + str(type(points)))
 
         if final < 1:
-            raise ValueError("Should be not less than 1")
+            raise ValueError("points - Should be not less than 1")
         self.__points = final
 
     def getProductCode(self):
-        return self.__productCode 
-    
+        return self.__productCode
+
     def getName(self):
-        return self.__name 
-    
+        return self.__name
+
     def getDescription(self):
-        return self.__description 
+        return self.__description
 
     def getPrice(self):
-        return self.__price 
+        return self.__price
 
     def getPoints(self):
-        return self.__points 
+        return self.__points
 
     productCode = property(getProductCode, setProductCode)
     name = property(getName, setName)

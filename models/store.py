@@ -1,4 +1,5 @@
-from models.StoreChain import StoreChain
+from models.store_chain import StoreChain
+
 
 class Store(StoreChain):
     def __init__(self, id, name, address, tel):

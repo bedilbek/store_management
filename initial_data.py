@@ -1,8 +1,8 @@
-from models.Order import Order
-from models.Store import Store
-from models.Product import Product
-from models.Staff import Staff
-from models.Customer import Customer
+from models.order import Order
+from models.store import Store
+from models.product import Product
+from models.staff import Staff
+from models.customer import Customer
 
 stores = [
     Store(1, "IUT-WebStore Management System", "Deutga", "156-25-63"),

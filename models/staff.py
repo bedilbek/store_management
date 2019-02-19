@@ -1,7 +1,7 @@
-from models import Citizen
+from models.citizen import Citizen
 
 
-class Staff(Citizen.Citizen):
+class Staff(Citizen):
     def __init__(self, name, address, ssn, id, jobTitle, salary):
         super().__init__(ssn, name, address)
         self.id = id
@@ -25,7 +25,7 @@ class Staff(Citizen.Citizen):
 
     def getSalary(self):
         return self.__salary
-    
+
     def setId(self, id):
         self.__id = id
 

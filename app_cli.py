@@ -1,6 +1,6 @@
-from models.Staff import Staff
-from models.Order import Order
-from models.Customer import Customer
+from models.staff import Staff
+from models.order import Order
+from models.customer import Customer
 from initial_data import products, customers, staffs, stores
 import os
 
