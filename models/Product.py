@@ -36,18 +36,26 @@ class Product:
         self.__description = description
 
     def setPrice(self, price: Union[float, int]):
-        if not isinstance(price, float) and not isinstance(price, int):
-            raise TypeError(price="Expected: int or float, Actual: " + str(type(price)))
-        if price < 0.001:
-            raise ValueError(price="Should be not less than 0.001")
-        self.__price = price
+        final = None
+        try:
+            final = float(price)
+        except:
+            raise TypeError("price - Expected: int or float, Actual: " + str(type(price)))
+
+        if final < 0.001:
+            raise ValueError("price - Should be not less than 0.001")
+        self.__price = final
 
     def setPoints(self, points):
-        if not isinstance(points, int):
-            raise TypeError(points="Expected: int, Actual" + str(type(points)))
-        if points < 1:
-            raise ValueError(points="Should be not less than 1")
-        self.__points = points
+        final = None
+        try:
+            final = int(points)
+        except:
+            raise TypeError("points - Expected: int, Actual" + str(type(points)))
+
+        if final < 1:
+            raise ValueError("Should be not less than 1")
+        self.__points = final
 
     def getProductCode(self):
         return self.__productCode 

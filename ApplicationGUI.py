@@ -1,5 +1,5 @@
 from tkinter import *
-
+from messageDialogBox import *
 from check import create_print_check
 from initial_data import stores, staffs, customers, products, orders
 
@@ -28,6 +28,9 @@ def addMoreAction(event):
     prListFrame.update_idletasks()
     prListCanvas.config(scrollregion=prListFrame.bbox("all"))
 
+def showMessage(event):
+    d = MessageDialogBox(keyWindow, "Something")
+    keyWindow.wait_window(d.top)
 
 #Welcoming Label
 welcomingLabel = Label(keyWindow, text=f"Welcome to {stores[0].name}")
@@ -114,5 +117,6 @@ closeBtn = Button(controlsFrame, text="Close", width=15)
 printBtn.pack(side=LEFT, padx=20, pady=10)
 closeBtn.pack(side=LEFT, padx=20, pady=10)
 closeBtn.bind("<Button-1>", lambda x: keyWindow.destroy())
+printBtn.bind("<Button-1>", showMessage)
 
 keyWindow.mainloop()
