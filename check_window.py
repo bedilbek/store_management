@@ -10,16 +10,14 @@ def onCanvasConfigure(event):
 
 def create_print_check(root: Tk, order: Order):
     check_window = tk.Toplevel(root)
-    general_info_frame = Frame(check_window, padding=(30, 30, 30, 15))
-    general_info_frame.pack()
+    general_info_frame = Frame(check_window, padding=(0, 0, 0, 0))
+    general_info_frame.pack(side= tk.TOP)
     tk.Label(general_info_frame, text='Welcome to ' + order.storeObject.name, justify=tk.CENTER, font=('Helvetica', 20)).pack(pady=10)
-
-    tk.Label(general_info_frame, text='Staff Name: \t' + order.staffObject.name, justify=tk.LEFT, font=('Helvetice', 11)).pack(anchor=tk.W, padx=20)
-
-    tk.Label(general_info_frame, text='Customer ID: \t' + str(order.customerObject.id), justify=tk.LEFT, font=('Helvetice', 11)).pack(anchor=tk.W, padx=20)
+    tk.Label(general_info_frame, text='Staff Name: \t' + order.staffObject.name, justify=tk.LEFT, font=('Helvetice', 11)).pack(anchor=tk.W, padx=0)
+    tk.Label(general_info_frame, text='Customer ID: \t' + str(order.customerObject.id), justify=tk.LEFT, font=('Helvetice', 11)).pack(anchor=tk.W, padx=0)
 
     # Products List frame
-    productsList = tk.Frame(check_window)
+    productsList = tk.Frame(check_window, bd=1, relief=tk.SUNKEN)
     productsList.pack(side=tk.TOP, fill=tk.X)
     productsList.columnconfigure(0, weight=1)
     productsList.columnconfigure(1, weight=1)
@@ -72,7 +70,7 @@ def create_print_check(root: Tk, order: Order):
     total_cost = sum([product.price*order.quantity[index] for index, product in enumerate(order.productObjects)])
     total_points = sum([product.points*order.quantity[index] for index, product in enumerate(order.productObjects)])
 
-    order_footer_info = Frame(check_window, padding=(50, 0, 0, 20))
+    order_footer_info = Frame(check_window, padding=(50, 20, 0, 20))
     order_footer_info.pack(side=tk.TOP, fill=tk.X)
     tk.Label(order_footer_info, text=f'Total: \t\t{total_cost}', font=('Helvetica', 11)).pack(anchor=tk.W)
     tk.Label(order_footer_info, text=f'Total Items: \t{sum(order.quantity)}', font=('Helvetica', 11)).pack(anchor=tk.W)
