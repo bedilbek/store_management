@@ -1,4 +1,4 @@
-from StoreChain import StoreChain
+from models.StoreChain import StoreChain
 
 class Store(StoreChain):
     def __init__(self, id, name, address, tel):

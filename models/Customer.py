@@ -1,4 +1,5 @@
-import Citizen
+from models import Citizen
+
 
 class Customer(Citizen.Citizen):
     def __init__(self, ssn, name, address, id, purchasingPoints, tel, memberships):

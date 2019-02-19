@@ -1,4 +1,5 @@
-import Citizen
+from models import Citizen
+
 
 class Staff(Citizen.Citizen):
     def __init__(self, name, address, ssn, id, jobTitle, salary):

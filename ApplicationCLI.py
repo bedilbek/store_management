@@ -1,33 +1,8 @@
-from Store import Store
-from Product import Product
-from Staff import Staff
-from Order import Order
-from Customer import Customer
+from models.Staff import Staff
+from models.Order import Order
+from models.Customer import Customer
+from initial_data import products, customers, staffs, stores
 import os
-
-stores = [
-    Store(1, "Travic", "Deutga", "156-25-63"),
-    Store(2, "Zatzu", "Wakanda", "693-95-19"),
-    Store(3, "Korzinka", "Tashkent", "596-27-03")
-]
-
-staffs = [
-    Staff("Jaiden", "Tashkent", "123465", 12, "Cashier", 5600),
-    Staff("Humongus", "Balls", "965412", 15, "Guard", 7600)
-]
-
-customers = [
-    Customer("5632879", "Dave", "Dventiliga", 256, 10, "589-44-85", ["Wings", "Golden"]),
-    Customer("9653287", "Gustavo", "Feritana", 25, 562, "555-44-44", ["Premium"])
-]
-
-products = [
-    Product("123456", "Chocolate Flavor", "Cookies with chocolate", 25, 1),
-    Product("954687", "Meat", "Tasty meat", 50, 5),
-    Product("248984", "Brick", "It is just a brick", 900, 3),
-    Product("967485", "Secret sause", "Special secret Krabsburger sause", 150, 2),
-    Product("336599", "Stick", "Stick for real man", 10, 4)
-]
 
 
 def cls():
@@ -132,4 +107,3 @@ while(True):
         break
         
 
-    
