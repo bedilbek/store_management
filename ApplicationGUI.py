@@ -28,7 +28,6 @@ def addMoreAction(event):
     prListFrame.update_idletasks()
     prListCanvas.config(scrollregion=prListFrame.bbox("all"))
 
-keyWindow = Tk("Store Management System")
 
 #Welcoming Label
 welcomingLabel = Label(keyWindow, text=f"Welcome to {stores[0].name}")
