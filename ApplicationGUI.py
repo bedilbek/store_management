@@ -34,7 +34,7 @@ welcomingLabel = Label(keyWindow, text=f"Welcome to {stores[0].name}")
 welcomingLabel.pack(side=TOP)
 
 #Staff, Customer input and Add More frame
-stctFrame = Frame(keyWindow, bg="gray")
+stctFrame = Frame(keyWindow)
 stctFrame.pack(side=TOP, fill=X, padx=10, pady=(20,10))
 
 staffNameLabel = Label(stctFrame, text="Staff Name")
@@ -52,16 +52,16 @@ customerIDOption = OptionMenu(stctFrame, customerIDVar, *[customer.id for custom
 addMoreButton = Button(stctFrame, text="+", width=10)
 
 staffNameLabel.grid(row=0,column=0, padx=2, pady=5, sticky=W)
-staffNameOption.grid(row=0, column=1, padx=2, pady=5)
+staffNameOption.grid(row=0, column=1, padx=2, pady=5, sticky=W+E)
 customerIDLabel.grid(row=1,column=0, padx=2, pady=5, sticky=W)
-customerIDOption.grid(row=1, column=1, padx=2, pady=5)
+customerIDOption.grid(row=1, column=1, padx=2, pady=5, sticky=W+E)
 addMoreLabel.grid(row=2,column=0, padx=2, pady=5, sticky=W)
-addMoreButton.grid(row=2,column=1, padx=2, pady=5)
+addMoreButton.grid(row=2,column=1, padx=10, pady=5, sticky=W)
 
 addMoreButton.bind("<Button-1>", addMoreAction)
 
 #Products List: frame
-productsList = Frame(keyWindow, bg="red")
+productsList = Frame(keyWindow)
 productsList.pack(side=TOP, fill=X)
 productsList.columnconfigure(0, weight=1)
 productsList.columnconfigure(1, weight=1)
@@ -92,7 +92,7 @@ prListCanvas.config(yscrollcommand=vscrollbar.set)
 vscrollbar.config(command=prListCanvas.yview)
 
 #Products List: Setting V-Scroll Frame
-prListFrame = Frame(prListCanvas, bg="blue")
+prListFrame = Frame(prListCanvas)
 prListFrame.columnconfigure(0, weight=1)
 prListFrame.columnconfigure(1, weight=1)
 prListFrame.columnconfigure(2, weight=1)
@@ -103,5 +103,16 @@ prListCanvas.create_window((0,0), anchor=NW, window=prListFrame, tags="products"
 prListFrame.update_idletasks() #REQUIRED: For f.bbox() below to work!
 prListCanvas.config(scrollregion=prListFrame.bbox("all"))
 prListCanvas.bind("<Configure>", onCanvasConfigure)
+
+#Controls: Setting Buttons
+controlsFrame = Frame(keyWindow)
+controlsFrame.pack(side=TOP, fill=BOTH, expand=True)
+
+printBtn = Button(controlsFrame, text="Print", width=15)
+closeBtn = Button(controlsFrame, text="Close", width=15)
+
+printBtn.pack(side=LEFT, padx=20, pady=10)
+closeBtn.pack(side=LEFT, padx=20, pady=10)
+closeBtn.bind("<Button-1>", lambda x: keyWindow.destroy())
 
 keyWindow.mainloop()
