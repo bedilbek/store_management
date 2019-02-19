@@ -30,12 +30,12 @@ class Product:
 
     def setName(self, name: str):
         if len(name.strip()) < 1:
-            raise ValueError(name="Should be at least length of 1")
+            raise ValueError("name - Should be at least length of 1")
         self.__name = name
 
     def setDescription(self, description: str):
         if len(description.strip()) < 1:
-            raise ValueError(name="Should be at least length of 1")
+            raise ValueError("description - Should be at least length of 1")
         self.__description = description
 
     def setPrice(self, price: Union[float, int]):

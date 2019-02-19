@@ -77,7 +77,11 @@ def create_print_check(root: Tk, order: Order):
     tk.Label(order_footer_info, text=f'Total: \t\t{total_cost}', font=('Helvetica', 11)).pack(anchor=tk.W)
     tk.Label(order_footer_info, text=f'Total Items: \t{sum(order.quantity)}', font=('Helvetica', 11)).pack(anchor=tk.W)
     tk.Label(order_footer_info, text=f'Points: \t\t{total_points}', font=('Helvetica', 11)).pack(anchor=tk.W)
-
+    
+    #rootWindow min max size setup
+    check_window.update()
+    check_window.maxsize(check_window.winfo_width() + 100, check_window.winfo_height())
+    check_window.minsize(check_window.winfo_width(), check_window.winfo_height())
 
 
 

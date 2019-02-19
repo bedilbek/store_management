@@ -3,7 +3,7 @@ from typing import List
 
 from message_dialog_box import *
 from check_window import create_print_check
-from initial_data import stores, staffs, customers, products, orders
+from initial_data import stores, staffs, customers, orders
 from models.order import Order
 from models.product import Product
 
@@ -14,6 +14,10 @@ customerIDVar = None
 staffNameVar = None
 
 def create_check(event):
+    if len(prEntryFields) == 0:
+        showMessage("There must be at least one product!")
+        return
+
     products = []
     try:
         for object_entry in prEntryFields:
@@ -41,6 +45,28 @@ def addMoreAction(event):
     prEntryFields.append(entry)
     prListFrame.update_idletasks()
     prListCanvas.config(scrollregion=prListFrame.bbox("all"))
+
+def addSampleProducts():
+    from initial_data import products
+    products: List[Product]
+    for i, p in enumerate(products):
+        eN = Entry(prListFrame)
+        eN.insert(0, p.name)
+        eN.grid(row=i,column=0)
+        eC = Entry(prListFrame)
+        eC.insert(0, p.productCode)
+        eC.grid(row=i,column=1)
+        eP = Entry(prListFrame)
+        eP.insert(0, p.price)
+        eP.grid(row=i,column=2)
+        eQ = Entry(prListFrame)
+        eQ.insert(0, "1")
+        eQ.grid(row=i,column=3)
+        ePo = Entry(prListFrame)
+        ePo.insert(0, p.points)
+        ePo.grid(row=i,column=4)
+        prEntryFields.append([eN, eC, eP, eQ, ePo])
+    return
 
 def showMessage(message):
     d = MessageDialogBox(keyWindow, message)
@@ -116,6 +142,8 @@ prListFrame.columnconfigure(2, weight=1)
 prListFrame.columnconfigure(3, weight=1)
 prListFrame.columnconfigure(4, weight=1)
 
+addSampleProducts()
+
 prListCanvas.create_window((0,0), anchor=NW, window=prListFrame, tags="products")
 prListFrame.update_idletasks() #REQUIRED: For f.bbox() below to work!
 prListCanvas.config(scrollregion=prListFrame.bbox("all"))
@@ -133,4 +161,10 @@ printBtn.pack(side=LEFT, padx=20, pady=10)
 closeBtn.pack(side=LEFT, padx=20, pady=10)
 closeBtn.bind("<Button-1>", lambda x: keyWindow.destroy())
 printBtn.bind('<Button-1>', create_check)
+
+#rootWindow min max size setup
+keyWindow.update()
+keyWindow.maxsize(keyWindow.winfo_width() + 500, keyWindow.winfo_height())
+keyWindow.minsize(keyWindow.winfo_width() + 200, keyWindow.winfo_height())
+
 keyWindow.mainloop()
