@@ -75,7 +75,11 @@ def create_print_check(root: Tk, order: Order):
     tk.Label(order_footer_info, text=f'Total: \t\t{total_cost}', font=('Helvetica', 11)).pack(anchor=tk.W)
     tk.Label(order_footer_info, text=f'Total Items: \t{sum(order.quantity)}', font=('Helvetica', 11)).pack(anchor=tk.W)
     tk.Label(order_footer_info, text=f'Points: \t\t{total_points}', font=('Helvetica', 11)).pack(anchor=tk.W)
-    
+
+    cancel_btn = tk.Button(check_window, text="Cancel", width=15)
+    cancel_btn.pack(side=tk.RIGHT, padx=10, pady=10)
+    cancel_btn.bind('<Button-1>', lambda x: check_window.destroy())
+
     #rootWindow min max size setup
     check_window.update()
     check_window.maxsize(check_window.winfo_width() + 100, check_window.winfo_height())
